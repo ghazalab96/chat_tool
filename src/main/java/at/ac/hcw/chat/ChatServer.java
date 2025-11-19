@@ -54,11 +54,12 @@ public class ChatServer {
                         //if client sends "exit", stop hte connection
                         if (received.equalsIgnoreCase("exit")) {
                             System.out.println("Client requested disconnect");
-                            out.println("exit");
-                            break;
+                            try{clientSocket.close();}catch(IOException ignored){}
+                            System.exit(0);//terminate programm hier
                         }
                         System.out.println("Client: " + received);
                     }
+                    System.out.println("Client closed the connection");
                 } catch (IOException e) {
                     // socket closed is expected when exit is called
                     System.out.println("Connection closed by server or client.");
@@ -76,12 +77,8 @@ public class ChatServer {
                         //if server types exit, close connection
                         if (message.equalsIgnoreCase("exit")) {
                             System.out.println("Server requested disconnect");
-                            // Notify client
-                            out.println("exit");
-
-                            clientSocket.shutdownOutput();
-                            clientSocket.shutdownInput();
-                            break; //exit the loop and end the thread
+                            try{clientSocket.close();}catch(IOException ignored){}
+                            System.exit(0);//terminate programm hier
                         }
                     }
                     //after exiting the loop, close the socket so receiveThread sees null.
@@ -107,11 +104,9 @@ public class ChatServer {
 
 
             // guaranties the safe port kill (so we don't get the "Already in use" message.
-            //close client
-            clientSocket.close();
-            System.out.println("Client disconnected");
+
             //close server
-            serverSocket.close();
+            // serverSocket.close();
             System.out.println("Server stopped safely");
 
         } catch (IOException e) {

@@ -54,11 +54,12 @@ public class ChatClient {
                         // If server sends "exit", close connection
                         if (received.equalsIgnoreCase("exit")) {
                             System.out.println("Server requested disconnect");
-                            out.println("exit");
-                            break;
+                            try{ socket.close();}catch(IOException ignored){}
+                            System.exit(0);//terminate programm hier
                         }
                         System.out.println("Server: " + received);
                     }
+                    System.out.println("Server closed to the connection.");
                 } catch (IOException e) {
                     System.out.println("Connection closed unexpectedly");
                 }
@@ -76,13 +77,10 @@ public class ChatClient {
                         // If client types "exit", close connection
                         if (message.equalsIgnoreCase("exit")) {
                             System.out.println("Client requested disconnect");
-                            // Notify server
-                            out.println("exit");
 
-                            socket.shutdownOutput();
-                            socket.shutdownInput();
+                            try{socket.close();}catch(IOException ignored){}
 
-                            break; //exit the loop and end the thread
+                            System.exit(0);//terminate programm hier
                         }
                     }
                     //after exiting the loop, close the socket so receiveThread sees null.
