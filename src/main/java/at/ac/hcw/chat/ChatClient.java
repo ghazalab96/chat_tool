@@ -94,7 +94,7 @@ public class ChatClient {
             // Start both threads
             receiveThread.start();
             sendThread.start();
-
+            //check thread
             // Wait until both threads finish before ending the program
             receiveThread.join();
             sendThread.join();

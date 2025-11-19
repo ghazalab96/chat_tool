@@ -141,7 +141,7 @@ public class ChatServer {
         }
         return null;
     }
-
+//check private ip
     private static boolean isPrivateIPv4(String ip) { // to check if its a private ip address or just loopback
         return ip.startsWith("10.") ||
                 ip.startsWith("192.168.") ||
