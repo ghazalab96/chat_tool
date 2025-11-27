@@ -63,7 +63,6 @@ public class ChatServer {
                 } catch (IOException e) {
                     // socket closed is expected when exit is called
                     System.out.println("Connection closed by server or client.");
-                    ;
                 }
             });
 
