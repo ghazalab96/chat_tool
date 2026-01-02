@@ -10,8 +10,14 @@ repositories {
     mavenCentral()
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
 javafx {
-    version = "23"
+    version = "21"
     modules = listOf("javafx.controls", "javafx.fxml")
 }
 
@@ -27,5 +33,3 @@ application {
 tasks.test {
     useJUnitPlatform()
 }
-
-
